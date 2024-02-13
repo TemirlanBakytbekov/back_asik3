@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Admin Dashboard</h1>
+        <div class="my-4">
+            <a href="/admin/users/new" class="btn btn-primary">Add New User</a>
+        </div>
+
+        <h2>Users</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(function(user, index) { %>
+                    <tr>
+                        <th scope="row"><%= index + 1 %></th>
+                        <td><%= user.username %></td>
+                        <td>
+                            <!-- Edit and Delete links need to properly reference the user's _id -->
+                            <!-- Convert ObjectId to string for use in URLs -->
+                            <a href="/admin/users/edit/<%= user._id.toString() %>" class="btn btn-sm btn-info">Edit</a>
+                            <!-- Implementing delete as a POST request might require a form or JavaScript -->
+                            <form action="/admin/users/delete/<%= user._id.toString() %>" method="POST" onsubmit="return confirm('Are you sure?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

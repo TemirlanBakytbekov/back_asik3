@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AQI Information</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+
+        <div class="mb-3">
+            <a href="/" class="btn btn-primary">Home Page</a>
+        </div>
+
+        <% if (aqiData && aqiData.status === "ok") { %>
+            <h1 class="mb-4 text-primary">Air Quality Index (AQI) for <%= aqiCity %></h1>
+            <div class="card mb-3">
+                <div class="card-header text-white bg-primary">AQI Overview</div>
+                <div class="card-body bg-light">
+                    <h5 class="card-title text-primary">AQI: <%= aqiData.data.aqi %></h5>
+                    <p class="card-text">Dominant Pollutant: <%= aqiData.data.dominentpol.toUpperCase() %></p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header text-white bg-info">Pollutants</div>
+                <ul class="list-group list-group-flush">
+                    <% for (const [key, value] of Object.entries(aqiData.data.iaqi)) { %>
+                        <li class="list-group-item">
+                            <%= key.toUpperCase() %>: <%= value.v %>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header text-white bg-primary">Forecast (PM2.5)</div>
+                <div class="card-body bg-light">
+                    <% aqiData.data.forecast.daily.pm25.forEach(forecast => { %>
+                        <p><strong>Date:</strong> <%= forecast.day %>, 
+                        <strong>Average:</strong> <%= forecast.avg %>, 
+                        <strong>Max:</strong> <%= forecast.max %>, 
+                        <strong>Min:</strong> <%= forecast.min %></p>
+                    <% }) %>
+                </div>
+            </div>
+        <% } else { %>
+            <p>No AQI data available for <%= aqiCity %>.</p>
+        <% } %>
+    </div>
+
+    <footer class="mt-5 text-center">
+        <hr>
+        <h2>Sarvarov Mustafa | Group: SE-2203</h2>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

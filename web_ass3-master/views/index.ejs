@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
+    <style>
+        body {
+            <% if (typeof weather !=='undefined' && weather) {
+                %>background-image: url('<%= weather.unsplashImage %>');
+                <%
+            }
+
+            %>
+        }
+    </style>
+
+    <title>Weather App</title>
+</head>
+
+<body class="container mt-5">
+
+    <div class="container">
+
+        <a href="/" class="text-decoration-none">
+            <h1 class="text-center">Weather Information</h1>
+        </a>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <!-- Signup and login buttons for unauthorized users -->
+        <% if (!loggedIn) { %>
+            <div class="text-right">
+                <a href="/signup" class="btn btn-primary mr-2">Sign Up</a>
+                <a href="/login" class="btn btn-success">Login</a>
+            </div>
+            <% } %>
+
+                <!-- Logout button for authenticated users -->
+                <% if (loggedIn) { %>
+                    <div class="text-right">
+                        <a href="/logout" class="btn btn-danger">Logout</a>
+                    </div>
+                    <% } %>
+
+                        <!-- Weather search form -->
+                        <form action="/weather" method="get" class="text-center">
+                            <div class="form-group">
+                                <label for="city">Enter city:</label>
+                                <input type="text" id="city" name="city" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Get Weather</button>
+                        </form>
+
+                        <% if (loggedIn) { %>
+                            <form action="/aqi" method="get" class="text-center mt-2">
+                                <div class="form-group">
+                                    <label for="aqiCity">Enter city for AQI:</label>
+                                    <input type="text" id="aqiCity" name="aqiCity" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Get AQI</button>
+                            </form>
+                            <% } %>
+
+                                <% if (typeof weather !=='undefined' && weather) { %>
+                                    <div class="mt-5 mx-auto text-center">
+                                        <h2 class="mb-4">Current Weather</h2>
+
+                                        <div class="weather-info">
+                                            <p class="info-item"><strong>Temperature:</strong>
+                                                <%= weather.temp %>°C
+                                            </p>
+                                            <p class="info-item"><strong>Description:</strong>
+                                                <%= weather.description %>
+                                            </p>
+                                            <img src="<%= weather.imgURL %>" alt="Weather Icon"
+                                                class="weather-icon img-fluid">
+                                        </div>
+
+                                        <div class="weather-details">
+                                            <p class="info-item"><strong>Coordinates:</strong>
+                                                <%= weather.coordinates.lat %>, <%= weather.coordinates.lon %>
+                                            </p>
+                                            <p class="info-item"><strong>Feels Like:</strong>
+                                                <%= weather.feelsLike %>°C
+                                            </p>
+                                            <p class="info-item"><strong>Humidity:</strong>
+                                                <%= weather.humidity %>%
+                                            </p>
+                                            <p class="info-item"><strong>Pressure:</strong>
+                                                <%= weather.pressure %> hPa
+                                            </p>
+                                            <p class="info-item"><strong>Wind Speed:</strong>
+                                                <%= weather.windSpeed %> m/s
+                                            </p>
+                                            <p class="info-item"><strong>Country Code:</strong>
+                                                <%= weather.countryCode %>
+                                            </p>
+                                            <p class="info-item"><strong>Rain Volume (last 3 hours):</strong>
+                                                <%= weather.rainVolumeLast3Hours %>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <% if (typeof weather !=='undefined' && weather) { %>
+                                        <div class="mt-5 mx-auto text-center">
+
+
+                                        </div>
+                                        <% } %>
+
+
+
+                                            <div id="googleMap"></div>
+                                            <br>
+                                            <br>
+
+
+    </div>
+
+
+    <script>
+        function initMap() {
+            var myCenter = new google.maps.LatLng(<%= weather.coordinates.lat %>, <%= weather.coordinates.lon %>);
+
+            var mapProp = {
+                center: myCenter,
+                zoom: 10,
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myCenter,
+                animation: google.maps.Animation.BOUNCE
+            });
+
+            marker.setMap(map);
+        }
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSNERGFARriiKLB-9Y82Uv6oUoGvUZUmU&callback=initMap"></script>
+    <% } %>
+
+    <footer class="mt-5 text-center">
+        <hr>
+        <h2>Sarvarov Mustafa | Group: SE-2203</h2>
+    </footer>
+
+        <!-- Google Maps api key - AIzaSyBSNERGFARriiKLB-9Y82Uv6oUoGvUZUmU -->
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

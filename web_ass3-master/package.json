@@ -1,0 +1,26 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "assignment 2 (web technologies 2 - back end)",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon your-app-file.js"
+  },
+  "author": "mustik",
+  "license": "ISC",
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.2",
+    "axios": "^1.6.5",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "covid19-api": "^1.2.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "google": "^2.1.0",
+    "https": "^1.0.0",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.1",
+    "node-fetch": "^2.7.0"
+  }
+}
