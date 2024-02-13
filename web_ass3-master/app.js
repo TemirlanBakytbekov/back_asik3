@@ -7,7 +7,7 @@ const port = 3000;
 
 // Set up session middleware
 app.use(session({
-    secret: 'mustik`s secret key', // Change this to a random string
+    secret: 'secret key', // Change this to a random string
     resave: false,
     saveUninitialized: false
   }));  
