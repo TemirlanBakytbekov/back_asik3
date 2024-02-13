@@ -2,5 +2,5 @@
 
 Admin:
 
-username - mustafaS
-password - mustafa123
+username - Temirlan
+password - 12345678
