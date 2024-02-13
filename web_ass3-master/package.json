@@ -1,12 +1,12 @@
 {
   "name": "weather",
   "version": "1.0.0",
-  "description": "assignment 2 (web technologies 2 - back end)",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "start": "nodemon your-app-file.js"
   },
-  "author": "mustik",
+  "author": "Temirlan",
   "license": "ISC",
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",
