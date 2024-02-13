@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const { MongoClient } = require('mongodb');
 const { ObjectId } = require('mongodb');
 
-const uri = 'mongodb+srv://mustiksarva:table1234554321@mailing.qungyk9.mongodb.net/?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://temik20172:<U4f88tem1k!>@cluster0.gu7rxob.mongodb.net/';
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect();
